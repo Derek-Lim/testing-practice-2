@@ -251,4 +251,81 @@ describe('calculator', () => {
       expect(calculator.divide(-3.14, 2.03)).toBeCloseTo(-1.55, 2)
     })
   })
+
+  describe('multiply', () => {
+    // invalid input policy
+    describe('invalid input', () => {
+      it('throws on non-numeric strings', () => {
+        expect(() => calculator.multiply('cattail', 'cat')).toThrow(MSG)
+      })
+
+      it('throws on numeric strings', () => {
+        expect(() => calculator.multiply('2', '1')).toThrow(MSG)
+        expect(() => calculator.multiply(2, '1')).toThrow(MSG)
+      })
+
+      it('throws on null/undefined', () => {
+        expect(() => calculator.multiply(1, undefined)).toThrow(MSG)
+        expect(() => calculator.multiply(null, 2)).toThrow(MSG)
+      })
+
+      it('throws on NaN or infinite values', () => {
+        expect(() => calculator.multiply(NaN, 1)).toThrow(MSG)
+        expect(() => calculator.multiply(Infinity, 1)).toThrow(MSG)
+        expect(() => calculator.multiply(-Infinity, 1)).toThrow(MSG)
+      })
+
+      it('throws when too few args', () => {
+        expect(() => calculator.multiply(1)).toThrow(MSG)
+        expect(() => calculator.multiply()).toThrow(MSG)
+      })
+
+      it('throws when too many args', () => {
+        expect(() => calculator.multiply(3, 2, 1)).toThrow(MSG)
+      })
+
+      it('throws on boolean values', () => {
+        expect(() => calculator.multiply(true, false)).toThrow(MSG)
+        expect(() => calculator.multiply(true, 21)).toThrow(MSG)
+      })
+
+      it('throws on objects/arrays', () => {
+        expect(() => calculator.multiply(['fat', 'cat'], ['cat'])).toThrow(MSG)
+        expect(() => calculator.multiply({}, 21)).toThrow(MSG)
+      })
+    })
+
+    // happy path & basic shapes
+    it('multiplies positive integers', () => {
+      expect(calculator.multiply(1, 2)).toBe(2)
+    })
+
+    it('multiplies negative integers', () => {
+      expect(calculator.multiply(-1, -2)).toBe(2)
+    })
+
+    it('multiplies mixed signs', () => {
+      expect(calculator.multiply(-1, 2)).toBe(-2)
+      expect(calculator.multiply(1, -2)).toBe(-2)
+    })
+
+    it('respects the multiplicative identity (x * 1 = x)', () => {
+      expect(calculator.multiply(42, 1)).toBe(42)
+    })
+
+    it('respects the multiplicative inverse (x * 1/x = 1)', () => {
+      expect(calculator.multiply(7, 1/7)).toBeCloseTo(1, 2)
+    })
+
+    it('is commutative (a * b === b * a)', () => {
+      expect(calculator.multiply(5, 7)).toBe(calculator.multiply(7, 5))
+      expect(calculator.multiply(-3, 4)).toBe(calculator.multiply(4, -3))
+    })
+
+    // floating point
+    it('multiplies floats (with precision tolerance)', () => {
+      expect(calculator.multiply(3.14, 2.03)).toBeCloseTo(6.3742, 2)
+      expect(calculator.multiply(-3.14, 2.03)).toBeCloseTo(-6.3742, 2)
+    })
+  })
 })

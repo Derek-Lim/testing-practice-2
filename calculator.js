@@ -35,5 +35,15 @@ export default function Calculator() {
     return a / b
   }
 
-  return { add, subtract, divide }
+  function multiply(a, b) {
+    if (arguments.length !== 2) throw new TypeError(MSG)
+
+    if (!Number.isFinite(a) || !Number.isFinite(b)) {
+      throw new TypeError(MSG)
+    }
+
+    return a * b
+  }
+
+  return { add, subtract, divide, multiply }
 }
