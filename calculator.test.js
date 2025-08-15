@@ -3,6 +3,7 @@ import Calculator from './calculator.js'
 describe('calculator', () => {
   let calculator
   const MSG = 'calculator expects two finite numbers'
+  const ZERO = 'cannot divide by zero'
   beforeEach(() => {
     calculator = Calculator()
   })
@@ -146,6 +147,108 @@ describe('calculator', () => {
     // floating point
     it('subtracts floats (with precision tolerance)', () => {
       expect(calculator.subtract(3.14, 2.03)).toBeCloseTo(1.11, 2)
+    })
+  })
+
+  describe('division', () => {
+    // invalid input policy
+    describe('invalid input', () => {
+      it('throws on non-numeric strings', () => {
+        expect(() => calculator.divide('cattail', 'cat')).toThrow(MSG)
+      })
+
+      it('throws on numeric strings', () => {
+        expect(() => calculator.divide('2', '1')).toThrow(MSG)
+        expect(() => calculator.divide(2, '1')).toThrow(MSG)
+      })
+
+      it('throws on null/undefined', () => {
+        expect(() => calculator.divide(1, undefined)).toThrow(MSG)
+        expect(() => calculator.divide(null, 2)).toThrow(MSG)
+      })
+
+      it('throws on NaN or infinite values', () => {
+        expect(() => calculator.divide(NaN, 1)).toThrow(MSG)
+        expect(() => calculator.divide(Infinity, 1)).toThrow(MSG)
+        expect(() => calculator.divide(-Infinity, 1)).toThrow(MSG)
+      })
+
+      it('throws when too few args', () => {
+        expect(() => calculator.divide(1)).toThrow(MSG)
+        expect(() => calculator.divide()).toThrow(MSG)
+      })
+
+      it('throws when too many args', () => {
+        expect(() => calculator.divide(3, 2, 1)).toThrow(MSG)
+      })
+
+      it('throws on boolean values', () => {
+        expect(() => calculator.divide(true, false)).toThrow(MSG)
+        expect(() => calculator.divide(true, 21)).toThrow(MSG)
+      })
+
+      it('throws on objects/arrays', () => {
+        expect(() => calculator.divide(['fat', 'cat'], ['cat'])).toThrow(MSG)
+        expect(() => calculator.divide({}, 21)).toThrow(MSG)
+      })
+
+      it('throws on division by zero', () => {
+        expect(() => calculator.divide(1, 0)).toThrow(ZERO)
+      })
+
+      it('throws on division by negative zero', () => {
+        expect(() => calculator.divide(1, -0)).toThrow(ZERO)
+      })
+    })
+
+    // happy path & basic shapes
+    it('divides positive integers without remainders', () => {
+      expect(calculator.divide(10, 2)).toBe(5)
+    })
+
+    it('divides positive integers with remainders', () => {
+      expect(calculator.divide(3, 2)).toBe(1.5)
+      expect(calculator.divide(1, 3)).toBeCloseTo(0.333, 3)
+    })
+
+    it('divides negative integers without remainders', () => {
+      expect(calculator.divide(-100, -10)).toBe(10)
+    })
+
+    it('divides negative integers with remainders', () => {
+      expect(calculator.divide(-2, -3)).toBeCloseTo(0.667, 3)
+    })
+
+    it('divides mixed signs without remainders', () => {
+      expect(calculator.divide(2, -2)).toBe(-1)
+      expect(calculator.divide(-10, 2)).toBe(-5)
+    })
+
+    it('divides mixed signs with remainders', () => {
+      expect(calculator.divide(1, -3)).toBeCloseTo(-0.333, 3)
+      expect(calculator.divide(-3, 2)).toBe(-1.5)
+    })
+
+    it('respects the multiplicative identity (x / 1 = x)', () => {
+      expect(calculator.divide(42, 1)).toBe(42)
+    })
+
+    it('respects the multiplicative inverse (x / x = 1)', () => {
+      expect(calculator.divide(2, 2)).toBe(1)
+    })
+
+    it('is not commutative (a / b !== b / a)', () => {
+      expect(calculator.divide(5, 7)).not.toBe(calculator.divide(7, 5))
+    })
+
+    it('handles zero numerator (0 / x = 0)', () => {
+      expect(calculator.divide(0, 1)).toBe(0)
+    })
+
+    // floating point
+    it('divides floats (with precision tolerance)', () => {
+      expect(calculator.divide(3.14, 2.03)).toBeCloseTo(1.55, 2)
+      expect(calculator.divide(-3.14, 2.03)).toBeCloseTo(-1.55, 2)
     })
   })
 })

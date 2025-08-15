@@ -21,5 +21,19 @@ export default function Calculator() {
     return a - b
   }
 
-  return { add, subtract }
+  function divide(a, b) {
+    const ZERO = 'cannot divide by zero'
+
+    if (arguments.length !== 2) throw new TypeError(MSG)
+
+    if (!Number.isFinite(a) || !Number.isFinite(b)) {
+      throw new TypeError(MSG)
+    }
+
+    if (b === 0) throw new TypeError(ZERO)
+
+    return a / b
+  }
+
+  return { add, subtract, divide }
 }
