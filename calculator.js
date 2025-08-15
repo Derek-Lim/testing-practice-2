@@ -1,0 +1,15 @@
+export default function Calculator() {
+  const MSG = 'calculator expects two finite numbers'
+
+  function add(a, b) {
+    if (arguments.length !== 2) throw new TypeError(MSG)
+
+    if (!Number.isFinite(a) || !Number.isFinite(b)) {
+      throw new TypeError(MSG)
+    }
+
+    return a + b
+  }
+
+  return { add }
+}
