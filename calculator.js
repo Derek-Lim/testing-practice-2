@@ -1,47 +1,33 @@
 export default function Calculator() {
-  const MSG = 'calculator expects two finite numbers'
-
-  function add(a, b) {
-    if (arguments.length !== 2) throw new TypeError(MSG)
-
+  const validate = (...args) => {
+    const ERR_INVALID_INPUT = 'calculator expects two finite numbers'
+    if (args.length !== 2) throw new TypeError(ERR_INVALID_INPUT)
+    const [a, b] = args
     if (!Number.isFinite(a) || !Number.isFinite(b)) {
-      throw new TypeError(MSG)
+      throw new TypeError(ERR_INVALID_INPUT)
     }
+    return [a, b]
+  }
 
+  const add = (...args) => {
+    const [a, b] = validate(...args)
     return a + b
   }
 
-  function subtract(a, b) {
-    if (arguments.length !== 2) throw new TypeError(MSG)
-
-    if (!Number.isFinite(a) || !Number.isFinite(b)) {
-      throw new TypeError(MSG)
-    }
-
+  const subtract = (...args) => {
+    const [a, b] = validate(...args)
     return a - b
   }
 
-  function divide(a, b) {
-    const ZERO = 'cannot divide by zero'
-
-    if (arguments.length !== 2) throw new TypeError(MSG)
-
-    if (!Number.isFinite(a) || !Number.isFinite(b)) {
-      throw new TypeError(MSG)
-    }
-
-    if (b === 0) throw new TypeError(ZERO)
-
+  const divide = (...args) => {
+    const [a, b] = validate(...args)
+    const ERR_DIVIDE_BY_ZERO = 'cannot divide by zero'
+    if (b === 0) throw new TypeError(ERR_DIVIDE_BY_ZERO)
     return a / b
   }
 
-  function multiply(a, b) {
-    if (arguments.length !== 2) throw new TypeError(MSG)
-
-    if (!Number.isFinite(a) || !Number.isFinite(b)) {
-      throw new TypeError(MSG)
-    }
-
+  const multiply = (...args) => {
+    const [a, b] = validate(...args)
     return a * b
   }
 
