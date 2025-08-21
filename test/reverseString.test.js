@@ -1,4 +1,4 @@
-import reverseString from "./reverseString.js"
+import reverseString from "../src/reverseString.js"
 
 describe('reverseString', () => {
   // Happy path & basic shapes

@@ -1,4 +1,4 @@
-import caesarCipher from './caesarCipher.js'
+import caesarCipher from '../src/caesarCipher.js'
 
 describe('caesarCipher', () => {
   // Invalid input policy

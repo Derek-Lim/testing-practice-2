@@ -1,4 +1,4 @@
-import analyzeArray from './analyzeArray.js'
+import analyzeArray from '../src/analyzeArray.js'
 
 describe('analyzeArray', () => {
   const INVALID_INPUT_ERROR = 'analyzeArray expects an array of numbers'
