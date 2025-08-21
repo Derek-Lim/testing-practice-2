@@ -40,5 +40,8 @@ const shiftLetter = (char, shift) => {
 
 export default function caesarCipher(...args) {
   const [str, shift] = validateArgs(...args)
-  return str.split('').map(char => shiftLetter(char, shift)).join('')
+  return str
+    .split('')
+    .map((char) => shiftLetter(char, shift))
+    .join('')
 }

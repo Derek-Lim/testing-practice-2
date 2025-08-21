@@ -18,17 +18,17 @@ const validateArgs = (...args) => {
 export default function analyzeArray(...args) {
   const arr = validateArgs(...args)
 
-  const normalizeZero = n => Object.is(n, -0) ? 0 : n
+  const normalizeZero = (n) => (Object.is(n, -0) ? 0 : n)
 
   const length = arr.length
-  const average = arr.reduce((total, cur) => total + cur, 0)/length
-  const min = arr.reduce((a, b) => b < a ? b : a, arr[0])
-  const max = arr.reduce((a, b) => b > a ? b : a, arr[0])
+  const average = arr.reduce((total, cur) => total + cur, 0) / length
+  const min = arr.reduce((a, b) => (b < a ? b : a), arr[0])
+  const max = arr.reduce((a, b) => (b > a ? b : a), arr[0])
 
   return {
     average,
     min: normalizeZero(min),
     max: normalizeZero(max),
-    length
+    length,
   }
 }

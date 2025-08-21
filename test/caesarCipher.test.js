@@ -9,56 +9,60 @@ describe('caesarCipher', () => {
       it('throws when no arguments', () => {
         expect(() => caesarCipher()).toThrow(INVALID_INPUT_ERROR)
       })
-  
+
       it('throws when second argument missing', () => {
         expect(() => caesarCipher('abc')).toThrow(INVALID_INPUT_ERROR)
       })
-  
+
       it('throws when too many arguments', () => {
         expect(() => caesarCipher('abc', 1, 2)).toThrow(INVALID_INPUT_ERROR)
       })
     })
-  
+
     describe('first argument (string)', () => {
       it('throws when first argument is integer', () => {
         expect(() => caesarCipher(1, 2)).toThrow(INVALID_INPUT_ERROR)
       })
-  
+
       it('throws when first argument is undefined/null', () => {
         expect(() => caesarCipher(undefined, 1)).toThrow(INVALID_INPUT_ERROR)
         expect(() => caesarCipher(null, 1)).toThrow(INVALID_INPUT_ERROR)
       })
-  
+
       it('throws when first argument is object/array/boolean', () => {
         expect(() => caesarCipher([], 2)).toThrow(INVALID_INPUT_ERROR)
         expect(() => caesarCipher({}, 2)).toThrow(INVALID_INPUT_ERROR)
         expect(() => caesarCipher(true, 2)).toThrow(INVALID_INPUT_ERROR)
       })
     })
-  
+
     describe('second argument (integer)', () => {
       it('throws when second argument is string', () => {
         expect(() => caesarCipher('abc', 'def')).toThrow(INVALID_INPUT_ERROR)
       })
-      
+
       it('throws when second argument is NaN', () => {
         expect(() => caesarCipher('abc', NaN)).toThrow(INVALID_INPUT_ERROR)
       })
-    
+
       it('throws when second argument is Infinity or -Infinity', () => {
         expect(() => caesarCipher('abc', Infinity)).toThrow(INVALID_INPUT_ERROR)
-        expect(() => caesarCipher('abc', -Infinity)).toThrow(INVALID_INPUT_ERROR)
+        expect(() => caesarCipher('abc', -Infinity)).toThrow(
+          INVALID_INPUT_ERROR
+        )
       })
-    
+
       it('throws when second argument is decimal', () => {
         expect(() => caesarCipher('abc', 1.5)).toThrow(INVALID_INPUT_ERROR)
       })
-    
+
       it('throws when second argument is undefined/null', () => {
-        expect(() => caesarCipher('def', undefined)).toThrow(INVALID_INPUT_ERROR)
+        expect(() => caesarCipher('def', undefined)).toThrow(
+          INVALID_INPUT_ERROR
+        )
         expect(() => caesarCipher('abc', null)).toThrow(INVALID_INPUT_ERROR)
       })
-  
+
       it('throws when second argument is object/array/boolean', () => {
         expect(() => caesarCipher(2, [])).toThrow(INVALID_INPUT_ERROR)
         expect(() => caesarCipher(2, {})).toThrow(INVALID_INPUT_ERROR)
@@ -73,11 +77,11 @@ describe('caesarCipher', () => {
       it('shifts one lowercase letter forward', () => {
         expect(caesarCipher('a', 1)).toBe('b')
       })
-      
+
       it('shifts multiple lowercase letters forward', () => {
         expect(caesarCipher('abcdefg', 3)).toBe('defghij')
       })
-  
+
       it('wraps one lowercase letter', () => {
         expect(caesarCipher('z', 1)).toBe('a')
       })
@@ -86,7 +90,7 @@ describe('caesarCipher', () => {
         expect(caesarCipher('xyz', 1)).toBe('yza')
         expect(caesarCipher('xyz', 3)).toBe('abc')
       })
-  
+
       it('does not change one lowercase letter if shift is 0', () => {
         expect(caesarCipher('a', 0)).toBe('a')
       })
@@ -109,11 +113,11 @@ describe('caesarCipher', () => {
       it('shifts one uppercase letter forward', () => {
         expect(caesarCipher('A', 1)).toBe('B')
       })
-      
+
       it('shifts multiple uppercase letters forward', () => {
         expect(caesarCipher('ABCDEFG', 3)).toBe('DEFGHIJ')
       })
-  
+
       it('wraps one uppercase letter', () => {
         expect(caesarCipher('Z', 1)).toBe('A')
       })
@@ -122,7 +126,7 @@ describe('caesarCipher', () => {
         expect(caesarCipher('XYZ', 1)).toBe('YZA')
         expect(caesarCipher('XYZ', 3)).toBe('ABC')
       })
-  
+
       it('does not change one uppercase letter if shift is 0', () => {
         expect(caesarCipher('X', 0)).toBe('X')
       })
@@ -149,7 +153,7 @@ describe('caesarCipher', () => {
       it('leaves emojis unchanged', () => {
         expect(caesarCipher('😂', 20)).toBe('😂')
       })
-  
+
       it('handles mixed case with punctuation', () => {
         expect(caesarCipher('Hello, World!😂', 3)).toBe('Khoor, Zruog!😂')
       })
@@ -165,15 +169,15 @@ describe('caesarCipher', () => {
     it('handles shift more than 26 on lowercase letters', () => {
       expect(caesarCipher('xyz', 29)).toBe('abc')
     })
-  
+
     it('handles negative shift less than -26 on lowercase letter', () => {
       expect(caesarCipher('a', -28)).toBe('y')
     })
-  
+
     it('handles shift more than 26 on uppercase letter', () => {
       expect(caesarCipher('Z', 100)).toBe('V')
     })
-  
+
     it('handles negative shift less than -26 on uppercase letter', () => {
       expect(caesarCipher('A', -28)).toBe('Y')
     })

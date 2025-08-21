@@ -45,7 +45,9 @@ describe('calculator', () => {
       })
 
       it('throws on objects/arrays', () => {
-        expect(() => calculator.add(['fat', 'cat'], ['cat'])).toThrow(ERR_INVALID_INPUT)
+        expect(() => calculator.add(['fat', 'cat'], ['cat'])).toThrow(
+          ERR_INVALID_INPUT
+        )
         expect(() => calculator.add({}, 21)).toThrow(ERR_INVALID_INPUT)
       })
     })
@@ -82,7 +84,9 @@ describe('calculator', () => {
     // invalid input policy
     describe('invalid input', () => {
       it('throws on non-numeric strings', () => {
-        expect(() => calculator.subtract('cattail', 'cat')).toThrow(ERR_INVALID_INPUT)
+        expect(() => calculator.subtract('cattail', 'cat')).toThrow(
+          ERR_INVALID_INPUT
+        )
       })
 
       it('throws on numeric strings', () => {
@@ -91,14 +95,20 @@ describe('calculator', () => {
       })
 
       it('throws on null/undefined', () => {
-        expect(() => calculator.subtract(1, undefined)).toThrow(ERR_INVALID_INPUT)
+        expect(() => calculator.subtract(1, undefined)).toThrow(
+          ERR_INVALID_INPUT
+        )
         expect(() => calculator.subtract(null, 2)).toThrow(ERR_INVALID_INPUT)
       })
 
       it('throws on NaN or infinite values', () => {
         expect(() => calculator.subtract(NaN, 1)).toThrow(ERR_INVALID_INPUT)
-        expect(() => calculator.subtract(Infinity, 1)).toThrow(ERR_INVALID_INPUT)
-        expect(() => calculator.subtract(-Infinity, 1)).toThrow(ERR_INVALID_INPUT)
+        expect(() => calculator.subtract(Infinity, 1)).toThrow(
+          ERR_INVALID_INPUT
+        )
+        expect(() => calculator.subtract(-Infinity, 1)).toThrow(
+          ERR_INVALID_INPUT
+        )
       })
 
       it('throws when too few args', () => {
@@ -111,12 +121,16 @@ describe('calculator', () => {
       })
 
       it('throws on boolean values', () => {
-        expect(() => calculator.subtract(true, false)).toThrow(ERR_INVALID_INPUT)
+        expect(() => calculator.subtract(true, false)).toThrow(
+          ERR_INVALID_INPUT
+        )
         expect(() => calculator.subtract(true, 21)).toThrow(ERR_INVALID_INPUT)
       })
 
       it('throws on objects/arrays', () => {
-        expect(() => calculator.subtract(['fat', 'cat'], ['cat'])).toThrow(ERR_INVALID_INPUT)
+        expect(() => calculator.subtract(['fat', 'cat'], ['cat'])).toThrow(
+          ERR_INVALID_INPUT
+        )
         expect(() => calculator.subtract({}, 21)).toThrow(ERR_INVALID_INPUT)
       })
     })
@@ -151,11 +165,13 @@ describe('calculator', () => {
 
   describe('divide', () => {
     const ERR_DIVIDE_BY_ZERO = 'cannot divide by zero'
-    
+
     // invalid input policy
     describe('invalid input', () => {
       it('throws on non-numeric strings', () => {
-        expect(() => calculator.divide('cattail', 'cat')).toThrow(ERR_INVALID_INPUT)
+        expect(() => calculator.divide('cattail', 'cat')).toThrow(
+          ERR_INVALID_INPUT
+        )
       })
 
       it('throws on numeric strings', () => {
@@ -189,7 +205,9 @@ describe('calculator', () => {
       })
 
       it('throws on objects/arrays', () => {
-        expect(() => calculator.divide(['fat', 'cat'], ['cat'])).toThrow(ERR_INVALID_INPUT)
+        expect(() => calculator.divide(['fat', 'cat'], ['cat'])).toThrow(
+          ERR_INVALID_INPUT
+        )
         expect(() => calculator.divide({}, 21)).toThrow(ERR_INVALID_INPUT)
       })
 
@@ -257,7 +275,9 @@ describe('calculator', () => {
     // invalid input policy
     describe('invalid input', () => {
       it('throws on non-numeric strings', () => {
-        expect(() => calculator.multiply('cattail', 'cat')).toThrow(ERR_INVALID_INPUT)
+        expect(() => calculator.multiply('cattail', 'cat')).toThrow(
+          ERR_INVALID_INPUT
+        )
       })
 
       it('throws on numeric strings', () => {
@@ -266,14 +286,20 @@ describe('calculator', () => {
       })
 
       it('throws on null/undefined', () => {
-        expect(() => calculator.multiply(1, undefined)).toThrow(ERR_INVALID_INPUT)
+        expect(() => calculator.multiply(1, undefined)).toThrow(
+          ERR_INVALID_INPUT
+        )
         expect(() => calculator.multiply(null, 2)).toThrow(ERR_INVALID_INPUT)
       })
 
       it('throws on NaN or infinite values', () => {
         expect(() => calculator.multiply(NaN, 1)).toThrow(ERR_INVALID_INPUT)
-        expect(() => calculator.multiply(Infinity, 1)).toThrow(ERR_INVALID_INPUT)
-        expect(() => calculator.multiply(-Infinity, 1)).toThrow(ERR_INVALID_INPUT)
+        expect(() => calculator.multiply(Infinity, 1)).toThrow(
+          ERR_INVALID_INPUT
+        )
+        expect(() => calculator.multiply(-Infinity, 1)).toThrow(
+          ERR_INVALID_INPUT
+        )
       })
 
       it('throws when too few args', () => {
@@ -286,12 +312,16 @@ describe('calculator', () => {
       })
 
       it('throws on boolean values', () => {
-        expect(() => calculator.multiply(true, false)).toThrow(ERR_INVALID_INPUT)
+        expect(() => calculator.multiply(true, false)).toThrow(
+          ERR_INVALID_INPUT
+        )
         expect(() => calculator.multiply(true, 21)).toThrow(ERR_INVALID_INPUT)
       })
 
       it('throws on objects/arrays', () => {
-        expect(() => calculator.multiply(['fat', 'cat'], ['cat'])).toThrow(ERR_INVALID_INPUT)
+        expect(() => calculator.multiply(['fat', 'cat'], ['cat'])).toThrow(
+          ERR_INVALID_INPUT
+        )
         expect(() => calculator.multiply({}, 21)).toThrow(ERR_INVALID_INPUT)
       })
     })
@@ -315,7 +345,7 @@ describe('calculator', () => {
     })
 
     it('respects the multiplicative inverse (x * 1/x = 1)', () => {
-      expect(calculator.multiply(7, 1/7)).toBeCloseTo(1, 2)
+      expect(calculator.multiply(7, 1 / 7)).toBeCloseTo(1, 2)
     })
 
     it('is commutative (a * b === b * a)', () => {

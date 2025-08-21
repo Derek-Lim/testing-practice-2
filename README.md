@@ -25,3 +25,4 @@ Clone this repo and install dependencies:
 git clone https://github.com/Derek-Lim/testing-practice-2.git
 cd testing-practice-2
 npm install
+```
